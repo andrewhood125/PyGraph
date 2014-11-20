@@ -9,6 +9,7 @@ class Graph:
     def populate(self, vertices=10):
         for i in range(vertices):
             self.vertices.append(Vertex(self.generate_unique_vertex_name()))
+        """ Connect the vertices together """
         self.generate_edges()
 
     def generate_unique_vertex_name(self):
