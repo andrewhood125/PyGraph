@@ -1,6 +1,6 @@
 from graph import Graph
 graph = Graph()
-graph.populate(9)
+graph.populate(3)
 
 print graph
 
