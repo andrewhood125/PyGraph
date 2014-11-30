@@ -33,7 +33,11 @@ class Graph:
     def generate_edges(self, min_weight, max_weight):
         for vertex in self.vertices:
             for i in range(random.randrange(1, len(self.vertices))):
-                vertex.connect(random.choice(self.vertices), random.randint(min_weight, max_weight))
+                neighbor_vertex = random.choice(self.vertices)
+                if vertex != neighbor_vertex:
+                    weight = random.randint(min_weight, max_weight)
+                    vertex.connect(neighbor_vertex, weight)
+                    neighbor_vertex.connect(vertex, weight)
 
     def __str__(self):
         ret_str = "Graph\n"
@@ -55,8 +59,6 @@ class Graph:
         # distances to itself is 0
         distances[start] = 0
 
-        for node in distances:
-            print node + " => " + str(distances[node])
 
         # select node with min distance in distances that is not in visited
         while len(visited) < len(self.vertices):
@@ -67,9 +69,11 @@ class Graph:
                     if distances[node] < min_distance:
                         min_node = node
                         min_distance = distances[node]
+
+            if(min_node == None): break
+
             visited.append(min_node)
 
-            print "min node: " + min_node
             # calculate new shortest distances with min_node
             min_node_vertex = self.get_vertex(min_node)
             for neighbor in min_node_vertex.neighbors:
@@ -79,8 +83,7 @@ class Graph:
                 if temp_distance < distances[neighbor]:
                     distances[neighbor] = temp_distance
 
-            for node in distances:
-                print node + " => " + str(distances[node])
+        return distances[end]
 
 
     def get_vertex(self, char):
