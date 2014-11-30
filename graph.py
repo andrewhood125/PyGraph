@@ -32,7 +32,7 @@ class Graph:
 
     def generate_edges(self, min_weight, max_weight):
         for vertex in self.vertices:
-            for i in range(random.randrange(1, len(self.vertices))):
+            for i in range(random.randrange(1, 3)):
                 neighbor_vertex = random.choice(self.vertices)
                 if vertex != neighbor_vertex:
                     weight = random.randint(min_weight, max_weight)
